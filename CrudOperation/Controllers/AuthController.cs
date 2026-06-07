@@ -42,7 +42,8 @@ namespace CrudOperation.Controllers
                     {
                         Email = dto.Email,
                         Password = dto.Password,
-                        Username = dto.Username
+                        Username = dto.Username,
+                        UserType = dto.UserType
                     };
 
                     _context.Users.Add(user);
@@ -83,7 +84,15 @@ namespace CrudOperation.Controllers
                 {
                     if(isUserExist.Password == dto.Password)
                     {
-                        return RedirectToAction("ViewStudent", "Student");
+                        if (isUserExist.UserType.ToLower() == "student")
+                        {
+                            return RedirectToAction("Student", "Dashboard");
+                        }
+                        else
+                        {
+                            return RedirectToAction("Recruiter", "Dashboard");
+                        }
+
                     }
                     else { ViewBag.ErrorMessage = "Pasword Does Not Matched."; return View("Login"); }
                 }

@@ -148,6 +148,19 @@
 
                     <span asp-validation-for="Password" class="text-danger"></span>
                 </div>
+                <div class="mb-4">
+                    <label asp-for="UserType" class="form-label fw-bold">
+                        User Type <span class="text-danger">*</span>
+                    </label>
+
+                    <select asp-for="UserType" class="form-select" required>
+                        <option value="">-- Select User Type --</option>
+                        <option value="Student">Student</option>
+                        <option value="Recruiter">Recruiter</option>
+                    </select>
+
+                    @* <span asp-validation-for="UserType" class="text-danger"></span> *@
+                </div>
 
                 <div class="d-grid">
                     <button type="submit" class="btn btn-register">

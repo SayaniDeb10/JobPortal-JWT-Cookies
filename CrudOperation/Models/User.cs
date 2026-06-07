@@ -12,5 +12,7 @@ namespace CrudOperation.Models
         public string Email { get; set; } = null!;
         [Required(ErrorMessage = "Password is Required.")]
         public string Password { get; set; } = null!;
+        [Required(ErrorMessage ="User Type is Required.")]
+        public string UserType { get; set; } = null!;
     }
 }

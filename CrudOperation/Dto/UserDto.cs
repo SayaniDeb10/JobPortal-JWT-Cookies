@@ -16,5 +16,6 @@ namespace CrudOperation.Dto
         //[StringLength(20, MinimumLength = 6,
         //    ErrorMessage = "Password must be between 6 and 20 characters")]
         public string Password { get; set; } = null!;
+        public string UserType { get; set; } = null!;
     }
 }

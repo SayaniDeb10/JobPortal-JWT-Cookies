@@ -58,8 +58,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Migrations\" />
     <Folder Include="obj\Debug\net10.0\staticwebassets\" />
-    <Folder Include="Views\Recruiter\" />
   </ItemGroup>
 
   <ItemGroup>

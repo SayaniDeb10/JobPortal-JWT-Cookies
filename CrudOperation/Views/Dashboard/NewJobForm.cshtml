@@ -1,0 +1,187 @@
+﻿@using CrudOperation.Dto
+@model JobDto
+
+@{
+    ViewData["Title"] = "Post Job";
+}
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<style>
+    body {
+        background-color: #f5f7fb;
+    }
+
+    .job-card {
+        max-width: 900px;
+        margin: 30px auto;
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0,0,0,.1);
+    }
+
+    .card-header-custom {
+        background: #0d6efd;
+        color: white;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .required {
+        color: red;
+    }
+</style>
+
+<div class="container">
+
+    <div class="card job-card">
+
+        <div class="card-header-custom">
+            <h3>@(Model?.Id >0 ? "Edit Job Details" : "Post New Job")</h3>
+            <p class="mb-0">@(Model?.Id > 0 ? "Update job opening" :"Create a new job opening")</p>
+        </div>
+
+        <div class="card-body p-4">
+
+            <form asp-action="SaveJob" method="post">
+
+                <input asp-for="Id" type="hidden" />
+                <input asp-for="RecruiterId" type="hidden" />
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="JobTitle" class="form-label fw-bold">
+                            Job Title <span class="required">*</span>
+                        </label>
+
+                        <input asp-for="JobTitle"
+                               class="form-control"
+                               name="jobtitle"
+                               placeholder="Enter Job Title" required/>
+
+                        <span asp-validation-for="JobTitle"
+                              class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="CompanyName" class="form-label fw-bold">
+                            Company Name <span class="required">*</span>
+                        </label>
+
+                        <input asp-for="CompanyName"
+                               class="form-control"
+                               name="companyname"
+                               placeholder="Enter Company Name" required />
+
+                        <span asp-validation-for="CompanyName"
+                              class="text-danger"></span>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Qualification" class="form-label fw-bold">
+                            Qualification <span class="required">*</span>
+                        </label>
+
+                        <input asp-for="Qualification"
+                               class="form-control"
+                               name="qualification"
+                               placeholder="B.Tech, MCA, BCA..." required />
+
+                        <span asp-validation-for="Qualification"
+                              class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Location" class="form-label fw-bold">
+                            Location <span class="required">*</span>
+                        </label>
+
+                        <input asp-for="Location"
+                               class="form-control"
+                               name="location"
+                               placeholder="Job Location" required />
+
+                        <span asp-validation-for="Location"
+                              class="text-danger"></span>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Experience" class="form-label fw-bold">
+                            Experience <span class="required">*</span>
+                        </label>
+
+                        <input asp-for="Experience"
+                               class="form-control"
+                               name="experience"
+                               placeholder="0-2 Years, 2-5 Years" required />
+
+                        <span asp-validation-for="Experience"
+                              class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Salary" class="form-label fw-bold">
+                            Salary (LPA) <span class="required">*</span>
+                        </label>
+
+                        <input asp-for="Salary"
+                               class="form-control"
+                               name="salary"
+                               placeholder="Enter Salary" required />
+
+                        <span asp-validation-for="Salary"
+                              class="text-danger"></span>
+                    </div>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label asp-for="JobDescription" class="form-label fw-bold">
+                        Job Description <span class="required">*</span>
+                    </label>
+
+                    <textarea asp-for="JobDescription"
+                              rows="6"
+                              class="form-control"
+                              name="jobdescription"
+                              placeholder="Enter detailed job description" required></textarea>
+
+                    <span asp-validation-for="JobDescription"
+                          class="text-danger"></span>
+
+                </div>
+
+                <div class="d-flex justify-content-end gap-2">
+
+                    <a asp-action="Recruiter"
+                       class="btn btn-secondary">
+                        Back
+                    </a>
+
+                    <button type="submit"
+                            class="btn btn-primary">
+                        @(Model?.Id > 0 ? "Update" : "Save")
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
