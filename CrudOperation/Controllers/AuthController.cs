@@ -3,6 +3,10 @@ using CrudOperation.Dto;
 using CrudOperation.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace CrudOperation.Controllers
 {
@@ -84,6 +88,15 @@ namespace CrudOperation.Controllers
                 {
                     if(isUserExist.Password == dto.Password)
                     {
+                        //var token = GenerateJWToken(dto);
+
+                        //Response.Cookies.Append("jwt_key", token, new CookieOptions
+                        //{
+                        //    HttpOnly = true,
+                        //    Secure = true,
+                        //    SameSite = SameSiteMode.Strict,
+                        //    Expires = DateTime.UtcNow.AddMinutes(30)
+                        //});
                         if (isUserExist.UserType.ToLower() == "student")
                         {
                             return RedirectToAction("Student", "Dashboard");
@@ -103,5 +116,24 @@ namespace CrudOperation.Controllers
                 return Content(ex.ToString());
             }
         }
+           
+       
+        //private string GenerateJWToken(UserDto dto)
+        //{
+        //    var jwtHandler = new JwtSecurityTokenHandler();
+        //    var key = Encoding.UTF8.GetBytes("eFwndUlSUWLFDnBAxTOpspSDvK8RpeYFdlnaCXQ4mJb");
+
+        //    var tokenDescriptor = new SecurityTokenDescriptor
+        //    {
+        //        Subject = new System.Security.Claims.ClaimsIdentity(new[]
+        //        {
+        //            new Claim(ClaimTypes.Name, dto.Email),
+        //        }),
+        //        Expires = DateTime.UtcNow.AddMinutes(30),
+        //        SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+        //    };
+        //    var token = jwtHandler.CreateToken(tokenDescriptor);
+        //    return jwtHandler.WriteToken(token);
+        //}
     }
 }

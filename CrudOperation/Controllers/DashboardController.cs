@@ -1,11 +1,13 @@
 ﻿using CrudOperation.Data;
 using CrudOperation.Dto;
 using CrudOperation.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace CrudOperation.Controllers
 {
+    [Authorize]
     public class DashboardController(AddDbContext _context) : Controller
     {
         public IActionResult Recruiter()
