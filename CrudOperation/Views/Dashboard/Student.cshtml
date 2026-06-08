@@ -1,4 +1,6 @@
-﻿@{
+﻿@using CrudOperation.Dto
+@model List<JobDto>
+@{
     ViewData["Title"] = "Student Dashboard";
 }
 
@@ -60,19 +62,20 @@
     </div>
 
     <h4 class="mb-3">Available Jobs</h4>
-
+    @if (Model != null && Model.Count > 0){
+        foreach(var app in Model){
     <div class="card shadow-sm mb-3">
         <div class="card-body">
 
-            <h5>.NET Developer</h5>
-            <h6 class="text-muted">ABC Technologies</h6>
+            <h5>@app.JobTitle</h5>
+            <h6 class="text-muted">@app.CompanyName</h6>
 
             <p>
-                <strong>Location:</strong> Kolkata
+                <strong>Location:</strong> @app.Location
             </p>
 
             <p>
-                <strong>Salary:</strong> ₹6 LPA
+                <strong>Salary:</strong> ₹@app.Salary LPA
             </p>
 
             <div class="text-end">
@@ -87,33 +90,13 @@
 
         </div>
     </div>
-
-    <div class="card shadow-sm mb-3">
-        <div class="card-body">
-
-            <h5>Software Engineer</h5>
-            <h6 class="text-muted">XYZ Solutions</h6>
-
-            <p>
-                <strong>Location:</strong> Bangalore
-            </p>
-
-            <p>
-                <strong>Salary:</strong> ₹8 LPA
-            </p>
-
-            <div class="text-end">
-                <a href="#" class="btn btn-outline-primary">
-                    View Details
-                </a>
-
-                <a href="#" class="btn btn-success">
-                    Apply Now
-                </a>
-            </div>
-
+}
+    }
+    else
+    {
+        <div class="alert alert-info">
+            No jobs available.
         </div>
-    </div>
-
+    }
 </div>
 

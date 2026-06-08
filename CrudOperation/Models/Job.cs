@@ -7,7 +7,7 @@ namespace CrudOperation.Models
         [Key]
         public int Id { get; set; }
 
-        public int RecruiterId { get; set; }
+        public int RecruiterId { get; set; }//FK
 
         public string JobTitle { get; set; } = null!;
 

@@ -90,6 +90,7 @@ namespace CrudOperation.Controllers
                         }
                         else
                         {
+                            HttpContext.Session.SetInt32("UserId", isUserExist.Id);
                             return RedirectToAction("Recruiter", "Dashboard");
                         }
 

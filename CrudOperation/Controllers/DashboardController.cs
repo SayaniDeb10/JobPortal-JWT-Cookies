@@ -10,13 +10,29 @@ namespace CrudOperation.Controllers
     {
         public IActionResult Recruiter()
         {
-            var list = _context.Jobs.Select(j => new JobDto 
-            { Id = j.Id, JobTitle = j.JobTitle, Location= j.Location, Salary = j.Salary }).ToList();
+            var id = HttpContext.Session.GetInt32("UserId");
+            var list = _context.Jobs
+                .Where(r => r.RecruiterId == id)
+                .Select(j => new JobDto 
+                  { Id = j.Id,
+                    JobTitle = j.JobTitle,
+                    Location= j.Location,
+                    Salary = j.Salary 
+                }).ToList();
             return View(list);
         }
         public IActionResult Student()
         {
-            return View();
+            var listOfjobs = _context.Jobs.Select(job => new JobDto
+            {
+                Id = job.Id,
+                JobDescription = job.JobDescription,
+                JobTitle = job.JobTitle,
+                Salary = job.Salary,
+                Qualification = job.Qualification,
+                Location = job.Location,
+            }).ToList();
+            return View(listOfjobs);
         }
         public IActionResult NewJobForm() => View();
 
@@ -54,6 +70,7 @@ namespace CrudOperation.Controllers
             {
                 if(job.Id == 0)
                 {
+                    var recruiterId = HttpContext.Session.GetInt32("UserId");
                     //Add Form
                     _context.Jobs.Add(new Job
                     {
@@ -63,7 +80,8 @@ namespace CrudOperation.Controllers
                         Location = job.Location,
                         Experience = job.Experience,
                         Salary = job.Salary,
-                        JobDescription = job.JobDescription
+                        JobDescription = job.JobDescription,
+                        RecruiterId = recruiterId.Value
                     });
                 }
                 else
@@ -91,6 +109,16 @@ namespace CrudOperation.Controllers
             }catch(Exception ex){
                 return Content(ex.ToString());
             }
+        }
+
+        
+        public async Task<IActionResult> DeleteJob(int jobsId)
+        {
+            var id = await _context.Jobs.FirstOrDefaultAsync(x => x.Id == jobsId);
+
+           _context.Jobs.Remove(id);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Recruiter");
         }
     }
 }

@@ -8,7 +8,7 @@ options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectio
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddSession();//Adding for session use---1
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.AddDbContext
@@ -21,7 +21,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseRouting();
-
+app.UseSession();//Use this for session storage----2
 app.UseAuthorization();
 
 app.MapStaticAssets();

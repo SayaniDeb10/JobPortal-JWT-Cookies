@@ -35,7 +35,7 @@
         <div class="col-md-4">
             <div class="card text-center shadow-sm">
                 <div class="card-body">
-                    <h3>10</h3>
+                    <h3>@Model.Count</h3>
                     <p class="mb-0">Jobs Posted</p>
                 </div>
             </div>
@@ -98,7 +98,7 @@
                                     Applicants
                                 </a>
 
-                                <a asp-action="DeleteJob" asp-route-id="@job.Id" class="btn btn-sm btn-danger">
+                                <a asp-controller="Dashboard" asp-action="DeleteJob" asp-route-jobsId="@job.Id" class="btn btn-sm btn-danger">
                                     Delete
                                 </a>
                             </td>
