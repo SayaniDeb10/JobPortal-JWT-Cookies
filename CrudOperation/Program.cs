@@ -11,35 +11,36 @@ options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectio
 
 
 //Middleware
-builder.Services.AddAuthentication(options =>
+builder.Services.AddAuthentication(option =>
 {
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 }).AddJwtBearer(x =>
 {
     x.RequireHttpsMetadata = false;
     x.SaveToken = true;
+
     x.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
     {
         ValidateAudience = false,
-        ValidateIssuer = false, 
-        ValidateLifetime= true,
+        ValidateIssuer = false,
+        ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("b2a0Lk3g1JF0U9DVxrmfb9orYbXGdUBPtePzqlPQepQ"))
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("a1Lm1EPNiTvPCy3ni8ATHku0D8f2Lq6NR6lzUe8Kckt"))
     };
 
     x.Events = new JwtBearerEvents
     {
         OnMessageReceived = context =>
         {
-            var token = context.Request.Cookies["jwt_ky"];
+            var token = context.Request.Cookies["jwt_key"];
+
             if (!string.IsNullOrEmpty(token))
             {
                 context.Token = token;
             }
             return Task.CompletedTask;
         },
-
         OnChallenge = context =>
         {
             context.HandleResponse();
